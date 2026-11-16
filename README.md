@@ -112,33 +112,92 @@ DB = {
 
 ## 4. 라이브러리 설치 및 프로그램 실행
 
-IntelliJ 하단 **Terminal**을 열고, `requirements.txt`가 있는 **프로젝트 루트**에서 실행합니다.
+IntelliJ IDEA 하단의 **Terminal**을 열고 프로젝트 폴더 위치를 확인합니다.
+
+### ① 일반적인 프로젝트 구조
+
+`requirements.txt`와 `app` 폴더가 현재 위치에 있는 경우 다음 명령어를 실행합니다.
 
 ```powershell
 python -m pip install -r requirements.txt
 python app/main.py
 ```
 
-Python 인터프리터를 `.venv`에 만들었다면 Windows에서는 다음처럼 직접 실행해도 됩니다.
+### ② 가상환경(.venv)을 사용하는 경우
+
+프로젝트 루트에 `.venv` 폴더가 있다면 다음 명령어를 실행합니다.
 
 ```powershell
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
-.\.venv\Scripts\python.exe app\main.py
+.\.venv\Scripts\python.exe .\app\main.py
 ```
 
-**폴더가 중첩되어 있고 `.venv`는 바깥 폴더에 있는 경우** (현재 작업 환경: 터미널 위치가 바깥 `code3-main`일 때):
+### ③ 프로젝트 폴더가 중첩된 경우 (현재 작업 환경)
+
+압축 해제 후 `pythoncode2-main` 폴더 안에 동일한 이름의 폴더가 한 번 더 들어 있고, `.venv`가 바깥 폴더에 있는 경우입니다.
+
+폴더 구조는 다음과 같습니다.
+
+```text
+pythoncode2-main/
+├── .venv/
+│   └── Scripts/
+│       └── python.exe
+└── pythoncode2-main/
+    ├── app/
+    │   ├── main.py
+    │   ├── queries.py
+    │   └── config.py
+    ├── requirements.txt
+    └── README.md
+```
+
+이 경우 바깥쪽 `pythoncode2-main` 폴더에서 다음 명령어를 실행합니다.
+
+**1. 필요한 라이브러리 설치**
 
 ```powershell
-.\.venv\Scripts\python.exe -m pip install -r .\code3-main\requirements.txt
-.\.venv\Scripts\python.exe .\code3-main\app\main.py
+.\.venv\Scripts\python.exe -m pip install -r .\pythoncode2-main\requirements.txt
 ```
 
-예를 들어 터미널이 `C:\Users\feas0\OneDrive\바탕 화면\code3-main>` 위치라면 위 중첩 폴더용 명령어를 사용하세요. **현재 작업 환경에서 실제로 실행되는 명령어**는 `.\.venv\Scripts\python.exe .\code3-main\app\main.py`입니다.
+**2. 병원 찾기 프로그램 실행**
 
-Python 버전 확인은 같은 위치에서 `.\.venv\Scripts\python.exe --version`을 실행하면 됩니다.
+```powershell
+.\.venv\Scripts\python.exe .\pythoncode2-main\app\main.py
+```
 
-성공하면 `========== 병원 찾기 ==========` 메뉴가 나타납니다. **0**은 종료, 선택 입력은 **Enter**로 생략, 지역·종별·과목의 **?**는 사용 가능한 값 목록을 표시합니다.
+**3. Python 버전 확인**
 
+```powershell
+.\.venv\Scripts\python.exe --version
+```
+
+### ④ 실행 결과
+
+프로그램이 정상적으로 실행되면 다음과 같은 메뉴가 표시됩니다.
+
+```text
+========== 병원 찾기 ==========
+ 1. 병원 검색
+ 2. 진료과목으로 병원 찾기
+ 3. 지역별 진료과목 현황
+ 4. 병원 상세 (진료과목 목록)
+ 5. 전문의가 많은 병원 TOP N
+ 6. 종별 병원 수 통계
+ 7. 진료과목이 많은 병원
+ 8. 특정 과목 병원이 없는 지역
+ 0. 종료
+===============================
+메뉴 선택:
+```
+
+메뉴 번호를 입력하면 해당 기능이 실행됩니다.
+
+- `0`: 프로그램 종료
+- `Enter`: 선택 입력 생략 또는 메뉴 복귀
+- `?`: 지역, 진료과목 등 선택 가능한 값 확인
+
+**주의사항:** 실행 전 MySQL 서버가 실행 중이어야 하며, `app/config.py`에 본인의 MySQL 연결 정보가 올바르게 설정되어 있어야 합니다.
 
 ## 5. 메뉴별 실행 테스트
 
