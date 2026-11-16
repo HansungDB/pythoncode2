@@ -126,14 +126,19 @@ Python 인터프리터를 `.venv`에 만들었다면 Windows에서는 다음처�
 .\.venv\Scripts\python.exe app\main.py
 ```
 
-**폴더가 중첩되어 있고 `.venv`는 바깥 폴더에 있는 경우** (터미널 위치가 바깥 `pythoncode2-main`일 때):
+**폴더가 중첩되어 있고 `.venv`는 바깥 폴더에 있는 경우** (현재 작업 환경: 터미널 위치가 바깥 `code3-main`일 때):
 
 ```powershell
-.\.venv\Scripts\python.exe -m pip install -r .\pythoncode2-main\requirements.txt
-.\.venv\Scripts\python.exe .\pythoncode2-main\app\main.py
+.\.venv\Scripts\python.exe -m pip install -r .\code3-main\requirements.txt
+.\.venv\Scripts\python.exe .\code3-main\app\main.py
 ```
 
+예를 들어 터미널이 `C:\Users\feas0\OneDrive\바탕 화면\code3-main>` 위치라면 위 중첩 폴더용 명령어를 사용하세요. **현재 작업 환경에서 실제로 실행되는 명령어**는 `.\.venv\Scripts\python.exe .\code3-main\app\main.py`입니다.
+
+Python 버전 확인은 같은 위치에서 `.\.venv\Scripts\python.exe --version`을 실행하면 됩니다.
+
 성공하면 `========== 병원 찾기 ==========` 메뉴가 나타납니다. **0**은 종료, 선택 입력은 **Enter**로 생략, 지역·종별·과목의 **?**는 사용 가능한 값 목록을 표시합니다.
+
 
 ## 5. 메뉴별 실행 테스트
 
